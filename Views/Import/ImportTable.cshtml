@@ -1,0 +1,38 @@
+﻿@using MovieManager.Models
+@using Newtonsoft.Json
+
+@model List<Media>
+
+@{
+    string mediaList = JsonConvert.SerializeObject(Model);
+}
+
+<div>
+    <table id="mediaTable" class="table table-striped table-wrap table-responsive" data-tabledata="@mediaList">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Type</th>
+                <th>IMDB Rating</th>
+                <th>Year Started</th>
+                <th>Year Ended</th>
+                <th>Genre</th>
+                <th>Starring</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<form id="saveForm" method="post" action="/Import/SaveImportedMedia">
+    <input type="hidden" name="json" id="json" />
+</form>
+
+<div>
+    <button class="btn btn-primary" onclick="Table.SaveImportedData()">Save</button>
+</div>
+
+<script src="~/Scripts/jquery-3.7.0.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+<script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
+<script src="~/Scripts/DataTables/dataTables.select.js"></script>
+<script src="~/Scripts/DataTable.js"></script>

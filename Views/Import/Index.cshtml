@@ -1,0 +1,27 @@
+﻿@using MovieManager.Models
+
+@model List<Media>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+@*Section for action buttons (Import, search, etc)*@
+<div class="container-fluid py-5">
+    <h2>Import</h2>
+
+    <form method="post" action="/Import/Index" enctype="multipart/form-data">
+        <label for="fileInput">Import from a File:</label>
+        <input type="file" name="file" class="form-control" id="fileInput" />
+
+        <button type="submit" class="btn btn-primary">Import</button>
+    </form>
+
+    <div>
+        @Html.Partial("ImportTable", Model)
+    </div>
+
+</div>
+

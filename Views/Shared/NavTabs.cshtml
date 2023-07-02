@@ -1,0 +1,24 @@
+﻿
+<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex">
+
+        <li class="nav-item">
+            @Html.ActionLink("Media List", "Index", "Dashboard", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Add Media", "Index", "AddMedia", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Import", "Index", "Import", null, new { @class = "nav-link" })
+        </li>
+    </ul>
+
+    <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+            @Html.ActionLink("Logout", "Logout", "Base", null, new { @class = "nav-link" })
+        </li>
+    </ul>
+</div>

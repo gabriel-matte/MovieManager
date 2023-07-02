@@ -1,0 +1,45 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "title": "JSON Schema for my Media file format",
+
+  "type": "object",
+
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the movie or television show."
+    },
+    "type": {
+      "type": "string",
+      "description": "Format of the media (tv, movie, etc)."
+    },
+    "year_start": {
+      "type": "number",
+      "description": "Year the media was released."
+    },
+    "year_end": {
+      "type": "number",
+      "description": "Year the media ended its run (for tv)."
+    },
+    "imdb_rating": {
+      "type": "number",
+      "description": "Rating given to the media on IMDB."
+    },
+    "genre": {
+      "type": "array",
+      "items": {
+        "description": "Genre of the media.",
+        "type": "string"
+      },
+      "maxItems": 3
+    },
+    "starring": {
+      "type": "array",
+      "items": {
+        "description": "Actor starring in the media.",
+        "type": "string"
+      },
+      "maxItems": 3
+    }
+  }
+}
