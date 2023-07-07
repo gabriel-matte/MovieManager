@@ -1,0 +1,126 @@
+﻿@model Media
+
+@using MovieManager.Models
+
+@{
+
+}
+
+@using (Html.BeginForm("EditModal", "Dashboard", FormMethod.Post, new { id = "editMediaForm" }))
+{
+    <div class="modal fade" id="edit-media-modal" tabindex="-1" role="dialog" aria-labelledby="EditMediaModal" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="mb-0">Edit Media</h3>
+                </div>
+                <div class="modal-body px-4 container-fluid">
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.Title)
+                            <div class="input-group w-100">
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                <button class="btn btn-outline-secondary" type="button" onclick="SearchImdb()">Search IMDB</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.ImdbLink)
+                            @Html.TextBoxFor(m => m.ImdbLink, new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.ImdbRating)
+                            @Html.TextBoxFor(m => m.ImdbRating, new { @class = "form-control", type = "number", step = "0.1" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.Type)
+                            @Html.DropDownListFor(m => m.Type, new SelectList(
+                                new List<Object>{
+                                    new { value = "", text = "Please Select" },
+                                    new { value = "movie", text = "Movie" },
+                                    new { value = "series", text = "TV Series" },
+                                    new { value = "doc", text = "Documentary" },
+                                },
+                                "value",
+                                "text",
+                                Model.Type
+                                ), new { @class = "form-select" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.YearStart)
+                            @Html.TextBoxFor(m => m.YearStart, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            @Html.LabelFor(m => m.YearEnd)
+                            @Html.TextBoxFor(m => m.YearEnd, new { @class = "form-control", type = "number" })
+                        </div>
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label for="add-genre">Genre</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="add-genre" placeholder="" aria-label="" aria-describedby="">
+                                <button class="btn btn-outline-secondary" type="button" onclick="AddGenre()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="d-flex flex-row justify-content-start" id="added-genres">
+                           
+                    </div>
+
+                    <div class="row mb-2">
+                        <div class="col">
+                            <label for="add-starring">Starring</label>
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" id="add-starring" placeholder="" aria-label="" aria-describedby="">
+                                <button class="btn btn-outline-secondary" type="button" onclick="AddStarring()">Add</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex flex-row justify-content-start" id="added-starring">
+
+                    </div>
+
+                    @Html.HiddenFor(m => m.ImdbLink)
+                    @Html.HiddenFor(m => m.Genre)
+                    @Html.HiddenFor(m => m.Starring)
+
+                </div>
+                <div class="modal-footer">
+                    <div class="row w-100 justify-content-between">
+
+                        <div class="col text-end">
+                            <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+                            <button class="btn btn-primary" type="button" onclick="SubmitEdit()">Edit</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+

@@ -1,0 +1,33 @@
+﻿@model List<Media>
+
+@using MovieManager.Models
+
+
+@{ 
+    ViewData["AddList"] = Model;
+}
+
+<div class="container-fluid py-5">
+    <h2>Add Media</h2>
+
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add-media-modal">
+        Add New Item
+    </button>
+
+    <div>
+        @Html.Partial("ImportTable", Model)
+    </div>
+
+    <form id="addForm" method="post" action="/AddMedia/AddAllItems">
+        <input type="hidden" name="jsonAdd" id="jsonAdd" />
+    </form>
+
+    <div>
+        <button class="btn btn-primary" onclick="Table.SaveAddData()">Save Added Media</button>
+    </div>
+
+    @Html.Partial("AddMediaModal", new Media())
+
+</div>
+
+<script src="~/Scripts/addMedia.js"></script>

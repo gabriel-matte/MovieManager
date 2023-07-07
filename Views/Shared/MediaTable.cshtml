@@ -18,6 +18,10 @@
                 <th>Year Ended</th>
                 <th>Genre</th>
                 <th>Starring</th>
+                <th>
+                    <img class="" src="../Content/images/IMDB_Logo.svg" alt="IMDB Link" width="40" height="22">
+                </th>
+                <th>Options</th>
             </tr>
         </thead>
     </table>
@@ -31,8 +35,11 @@
     <button class="btn btn-primary" onclick="Table.SaveImportedData()">Save</button>
 </div>
 
+@Html.Partial("EditMediaModal", new Media())
+
 <script src="~/Scripts/jquery-3.7.0.js"></script>
 <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
 <script src="~/Scripts/DataTables/dataTables.responsive.js"></script>
 <script src="~/Scripts/DataTables/dataTables.select.js"></script>
 <script src="~/Scripts/DataTable.js"></script>
+<script src="~/Scripts/editMedia.js"></script>

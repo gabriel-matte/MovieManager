@@ -4,7 +4,19 @@
 @{ 
     ViewBag.Title = "Dashboard";
 
-    List<Media> mediaList = (List<Media>)Session["MediaList"];
+    bool showFiltered = Session["ShowFiltered"].ToString() == "true" ? true : false;
+
+    List<Media> mediaList;
+
+    if (showFiltered)
+    {
+        mediaList = (List<Media>)Session["SearchResults"];
+    }
+    else
+    {
+        mediaList = (List<Media>)Session["MediaList"];
+    }
+
 
     SelectList typeSelect = new SelectList(new List<Object> {
             new { value = "", text = "All" },
@@ -14,86 +26,92 @@
         },
         "value",
         "text",
-        Model.Type
+        (typeof (SearchParameters))
     );
 }
 
-    <div class="container-fluid py-5">
+<div class="container-fluid py-5">
 
-        <h1>Movie List</h1>
+    <h1>Movie List</h1>
 
-        <button class="btn btn-primary" id="adv-search-btn" onclick="toggleSearchParams()">Advanced Search</button>
+    <button class="btn btn-primary mb-3" id="adv-search-btn" onclick="toggleSearchParams()">Advanced Search</button>
 
-        <div class="search-container card my-5 d-none" id="search-container">
-            <div class="card-body">
-                <div class="row">
-                    <h3>Advanced Search</h3>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Title)
-                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
-                        @*<label for="search-title">Title</label>
-                        <input type="text" class="form-control" id="search-title" name="search-title" />*@
-                    </div>
-                    <div class="col-md-4">
-                        <label for="">Type</label>
-                        @Html.LabelFor(model => model.Type)
-                        @Html.DropDownListFor(model => model.Type, typeSelect, new { @class = "form-select" })
-                        @*<select class="form-select" id="search-type" name="search-type">
-                            <option value="" selected>All</option>
-                            <option value="Movie">Movies</option>
-                            <option value="Series">TV Series</option>
-                            <option value="Documentary">Documentaries</option>
-                        </select>*@
-                    </div>
-                    <div class="col-md-4">
-
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.YearStart)
-                        @Html.TextBoxFor(model => model.YearStart, new { @class = "form-control", type = "number" })
-                        @*<label for="search-yearstart">Year Start</label>
-                        <input type="number" class="form-control" idi="search-yearstart" name="search-yearstart" />*@
-                    </div>
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.YearEnd)
-                        @Html.TextBoxFor(model => model.YearEnd, new { @class = "form-control", type = "number" })
-                        @*<label for="search-yearend">Year Start</label>
-                        <input type="number" class="form-control" id="search-yearend" name="search-yearend" />*@
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Genre)
-                        @Html.TextBoxFor(model => model.Genre, new { @class = "form-control" })
-                        @*<label for="search-genre">Genre</label>
-                        <input type="text" class="form-control" id="search-genre" name="search-genre" />*@
-                    </div>
-                    <div class="col-md-4">
-                        @Html.LabelFor(model => model.Starring)
-                        @Html.TextBoxFor(model => model.Starring, new { @class = "form-control" })
-                        @*<label for="search-starring">Starring</label>
-                        <input type="text" class="form-control" id="search-starring" name="search-starring" />*@
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-
-                    </div>
-                </div>
-
-
-
-
+    
+    <div class="search-container card my-5 d-none" id="search-container">
+        <div class="card-body">
+            @Html.BeginForm("Index", "Dashboard", FormMethod.Post)
+            <div class="row">
+                <h3>Advanced Search</h3>
             </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SearchTitle)
+                    @Html.TextBoxFor(model => model.SearchTitle, new { @class = "form-control" })
+                    @*<label for="search-title">Title</label>
+                <input type="text" class="form-control" id="search-title" name="search-title" />*@
+                </div>
+                <div class="col-md-4">
+                    <label for="">Type</label>
+                    @Html.LabelFor(model => model.SearchType)
+                    @Html.DropDownListFor(model => model.SearchType, typeSelect, new { @class = "form-select" })
+                    @*<select class="form-select" id="search-type" name="search-type">
+                    <option value="" selected>All</option>
+                    <option value="Movie">Movies</option>
+                    <option value="Series">TV Series</option>
+                    <option value="Documentary">Documentaries</option>
+                </select>*@
+                </div>
+                <div class="col-md-4">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SearchYearStart)
+                    @Html.TextBoxFor(model => model.SearchYearStart, new { @class = "form-control", type = "number" })
+                    @*<label for="search-yearstart">Year Start</label>
+                <input type="number" class="form-control" idi="search-yearstart" name="search-yearstart" />*@
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SearchYearEnd)
+                    @Html.TextBoxFor(model => model.SearchYearEnd, new { @class = "form-control", type = "number" })
+                    @*<label for="search-yearend">Year Start</label>
+                <input type="number" class="form-control" id="search-yearend" name="search-yearend" />*@
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SearchGenre)
+                    @Html.TextBoxFor(model => model.SearchGenre, new { @class = "form-control" })
+                    @*<label for="search-genre">Genre</label>
+                <input type="text" class="form-control" id="search-genre" name="search-genre" />*@
+                </div>
+                <div class="col-md-4">
+                    @Html.LabelFor(model => model.SearchStarring)
+                    @Html.TextBoxFor(model => model.SearchStarring, new { @class = "form-control" })
+                    @*<label for="search-starring">Starring</label>
+                <input type="text" class="form-control" id="search-starring" name="search-starring" />*@
+                </div>
+            </div>
+            <div class="row justify-content-between mt-4">
+                <div class="col-md-4">
+                    <button class="btn btn-secondary" id="close-search-btn" onclick="toggleSearchParams()">Cancel</button>
+                </div>
+                <div class="col-md-4 text-end">
+                    <button class="btn btn-secondary" id="clear-search-btn" onclick="clearSearch()">Clear Search</button>
+                    <button class="btn btn-primary" id="search-submit-btn" type="submit">Apply Filters</button>
+                </div>
+            </div>
+
+
+
+
         </div>
-
-        @Html.Partial("MediaTable", mediaList)
-
     </div>
+
+    @Html.Partial("MediaTable", mediaList)
+
+</div>
 
 <script src="../Scripts/search.js"></script>

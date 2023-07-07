@@ -7,18 +7,18 @@ namespace MovieManager.Models
 {
     public class SearchParameters
     {
-        public string Title { get; set; }
+        public string SearchTitle { get; set; }
 
-        public string Type { get; set; }
+        public string SearchType { get; set; }
 
-        public int? YearStart { get; set; }
+        public int? SearchYearStart { get; set; }
 
-        public int? YearEnd { get; set; }
+        public int? SearchYearEnd { get; set; }
 
-        public double? ImdbRating { get; set; }
+        public double? SearchImdbRating { get; set; }
 
-        public string Genre { get; set; }
+        public string SearchGenre { get; set; }
 
-        public string Starring { get; set; }
+        public string SearchStarring { get; set; }
     }
 }

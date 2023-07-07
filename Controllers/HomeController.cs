@@ -30,6 +30,7 @@ namespace MovieManager.Controllers
             if (valid)
             {
                 Session.Add("Username", user.Username);
+                Session.Add("ShowFiltered", "false");
                 return RedirectToAction("Index", "Dashboard");
             }
 
