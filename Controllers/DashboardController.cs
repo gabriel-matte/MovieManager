@@ -29,6 +29,7 @@ namespace MovieManager.Controllers
             {
                 string username = Session["Username"].ToString();
                 string filepath = Server.MapPath("~").ToString() + "Data\\" + username + ".json";
+                string testfilepath = Server.MapPath("~").ToString() + "Data\\" +  "test.txt";
 
                 using (FileStream fs = System.IO.File.Open(filepath, FileMode.Open))
                 {
