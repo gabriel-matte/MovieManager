@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using MovieManager.Models;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using Microsoft.ApplicationInsights;
 
 namespace MovieManager.Controllers
 {
