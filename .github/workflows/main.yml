@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 # Run workflow on every push to the master branch
 on:
   push:
-    branches: [ moviemanager ]
+    branches: [ master ]
 jobs:
   deploy-to-github-pages:
     # use ubuntu-latest image to run steps on
@@ -21,7 +21,7 @@ jobs:
       run: dotnet publish MovieManager.csproj -c Release -o release --nologo
       
     - name: Commit wwwroot to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+      uses: gabriel-matte/github-pages-deploy-action@3.7.1
       with:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         BRANCH: gh-pages
